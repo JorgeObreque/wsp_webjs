@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  bot-wsp:
+    build: .
+    container_name: bot-wsp
+    volumes:
+      - .:/usr/src/app
+      - ./wweb-session:/root/.wwebjs_auth
+      - /usr/src/app/node_modules
+    env_file:
+      - .env
+    restart: unless-stopped
+    tty: true
+    networks:
+      - shared-net
+
+networks:
+  shared-net:
+    external: true
